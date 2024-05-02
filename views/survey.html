@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Survey</title>
+</head>
+<body>
+<div class="fs-5">
+    <form action="#" method="post" class="row g-3">
+        <div class="col-8 g-5">
+            <div class="row">
+                <!--get name-->
+                <div class="form-group col-6">
+                    <label for="name" class="control-label">Name:</label>
+                    <input class="form-control" type="text" name="name" id="name" >
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label class="form-label">Check all that apply:</label><br>
+                        <div class="col-4">
+                            <repeat group="{{ @questions }}" value="{{ @question }}">
+                                <input class="form-check-input" type="checkbox" id="{{ @question }}" value="{{ @question }}" name="answers[]">
+                                <label class="form-check-label" for="{{ @question }}">{{ @question }}</label>
+                            </repeat>
+
+                        </div>
+                </div>
+            </div>
+        </div>
+        <!-- submit button -->
+        <div class="col-4 d-flex justify-content-end">
+            <button class="btn btn-success" type="submit">Next ></button>
+        </div>
+    </form>
+</div>
+
+
+
+</body>
+</html>

@@ -24,11 +24,20 @@ $f3->route('GET /', function() {
 });
 
 $f3->route('GET|POST /survey', function($f3) {
+    $name = $_POST['name'];
+
     if($_SERVER['REQUEST_METHOD']== 'POST') {
         // set variables
+        if (isset($_POST['answers']))
+            $answers = implode(', ', $_POST['answers']);
+        else
+            $questions = $_POST['answers'];
+
+        $f3->set('SESSION.name', $name);
+        $f3->set('SESSION.answers', $answers);
 
         //reroute to summary
-
+        $f3->reroute('summary');
     }
 
     // get data from model and add to hive
@@ -38,6 +47,17 @@ $f3->route('GET|POST /survey', function($f3) {
     // render view page
     $view = new Template();
     echo $view->render('views/survey.html');
+});
+
+
+//Summary
+$f3->route('GET /summary', function($f3) {
+
+    //var_dump( $f3->get('SESSION'));
+
+    // Render a view page
+    $view = new Template();
+    echo $view->render('views/summary.html');
 });
 
 // Run Fat-Free
